@@ -1,18 +1,23 @@
 <?php
 
     require ('connexiondb.php');
+
+    $login ="";
+    $mdp = "";
+    $confirmmdp = "";
     
 
     if (!empty($_POST)) {
         extract($_POST);
         $valid = (boolean) true;
 
-        $login = $_POST['login'];
-        $mdp= $_POST['mdp'];
-        $confirmmdp = $_POST['confirmmdp'];
 
 
         if (isset($_POST['inscription'])) {  // SI CLIQUE SUR INSCRIPTION ALORS...
+
+            $login = trim($_POST['login']);
+            $mdp= trim($_POST['mdp']);
+            $confirmmdp = trim($_POST['confirmmdp']);
 
             // TESTS DU LOGIN --------------------------------------------------------------------------------------------------------------------
 
@@ -25,6 +30,7 @@
                 
                 $err_login = "Veuillez renseigner votre login.";
                 $valid = false;
+                $login="";
             }
 
             elseif (!preg_match("#^[a-z0-9]+$#" ,$login)) {                               // LOGIN : SANS MAJ, SANS SPEC, MIN ET CHIFFRES OK
@@ -32,6 +38,7 @@
                 
                 $err_login = "Le login doit être renseigné uniquement en lettres miniscules ou chiffres, sans caractères spéciaux." ;
                 $valid = false;
+                $login="";
 
             }        
             
@@ -39,6 +46,7 @@
                       
                 $err_login= "Le login est trop long, il dépasse 25 caractères.";
                 $valid= false;
+                $login="";
             }
 
 
@@ -47,6 +55,7 @@
 
                 $err_login = "Ce login est déjà utilisé.";
                 $valid = false;
+                $login="";
 
             }
 
@@ -56,6 +65,7 @@
 
                 $err_mdp = "Veuillez renseigner votre mot de passe.";
                 $valid=false;
+                $mdp="";
             }
 
 
@@ -64,6 +74,7 @@
             elseif(!preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/',$mdp)) {
                 $err_mdp = "Le mot de passe ne respecte pas les condtions.";
                 $valid = false;
+                $mdp="";
 
             }
 
@@ -72,6 +83,7 @@
 
                 $err_confirmmdp = "Veuillez confirmer votre mot de passe.";
                 $valid = false;
+                $confirmmdp="";
 
             }
 
@@ -81,6 +93,7 @@
 
                     $err_confirm ="Les mots de passe ne correspondent pas.";
                     $valid = false;
+                    $confirmmdp="";
 
                 }
 
@@ -144,14 +157,14 @@
                     <form action="inscription.php" method="post" class="styleform">
 
                         <?php if(isset($err_login)) { echo "<div class='formerror'> $err_login </div>";} ?>
-                        <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
+                        <div><input type="text" class="basicinput" name="login" placeholder="Login" value="<?php echo $login ;?>"></div>
                         
                         <?php if(isset($err_mdp)) { echo "<div class='formerror'> $err_mdp </div>";} ?>
-                        <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
+                        <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe" value="<?php echo $mdp ;?>"></div>
 
                         <?php if(isset($err_confirmmdp)) { echo "<div class='formerror'> $err_confirmmdp </div>";} ?>
                         <?php if(isset($err_confirm)) { echo "<div class='formerror'> $err_confirm </div>";} ?>
-                        <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe"></div>
+                        <div><input type="password" class="basicinput" name="confirmmdp" placeholder="Confirmez votre mot de passe" value="<?php echo $confirmmdp ;?>"</div>
 
                         
                         <div><input type="submit" class="submitbtn" name="inscription" value="S'inscrire"><br></div>
