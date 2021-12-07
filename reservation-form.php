@@ -1,6 +1,112 @@
 <?php
 
-session_start()
+session_start() ;
+
+require('connexiondb.php') ; 
+
+if (!empty($_GET)) {
+    extract($_GET);
+    $valid = (boolean) true;        // UTILISATION DE LA VARIABLE VALIDE POUR RENDRE LES ERREURS 
+
+
+    // SIMPLIFICATION DES GETS
+
+    $title = $_GET['title'];
+    $description = $_GET['description'];
+    $day = $_GET['day'];
+    $hour = $_GET['hour'];
+
+    // RESERVER => VERIF DES ERREURS
+
+    if (isset($_GET['reserver'])) {
+
+        // REQUETE POUR VOIR SI TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
+
+        // $testtitle = mysqli_query($mysqli, "SELECT * FROM reservation-salles WHERE titre = $title") ;
+        
+        // $titlerows = mysqli_num_rows($testtile) ;
+
+        // ERREURS TITRE
+
+        if(empty($title)) {
+            $valid = false;
+            $err_title = "Veuillez renseigner le titre de l'évènement."
+            echo $err_title;
+        }
+
+        elseif (strlen($title)<45) {
+            $valid = false;
+            $err_title = "Le titre ne doit pas dépasser 45 caractères."
+        }
+
+        // VERIF SI LE TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
+
+        // elseif ($titlerows == 1 ) {
+        //    $err_title = "Un autre évènement ayant le même titre existe déjà.";
+        //    $valid = false;
+        //    echo $err_title;
+        // }
+
+        // ERREURS DESCRIPTION
+
+        if (empty($description)) {
+            $valid = false;
+            $err_description = "Veuillez renseigner une description." ;
+            echo $err_description ;
+        }
+
+        elseif (strlen($description)<500) {
+            $valid = false;
+            $err_description = "La description ne doit pas dépasser 500 caractères".
+        }
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
 
 ?>
 
@@ -30,9 +136,11 @@ session_start()
 
                     <form action="reservation-form.php" method="get" class="styleform">
 
-                        <div><input type="text" class="basicinput" name="titre" placeholder="Titre de l'évènement"></div>
+                        <div><input type="text" class="basicinput" name="title" placeholder="Titre de l'évènement"></div>
 
                         <div><input type="text" class="textinput" name="description" placeholder="Description"></div>
+
+                        <!-- AJOUTER UN COMPTEUR DE CARACTERES -->
 
                         <div>
 
@@ -50,7 +158,7 @@ session_start()
                         </div>
 
                         <div>
-                            
+
                             <select class="selectinput" name="hour">
 
                                 <option value="">Sélectionnez un créneau horaire</option>
@@ -69,6 +177,8 @@ session_start()
                             </select>
 
                         </div>
+
+                        <input type="submit" name="reserver" value="Réserver" class="submitbtn">
 
                     </form>
 
