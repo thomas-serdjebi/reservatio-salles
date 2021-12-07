@@ -109,7 +109,9 @@
                 if (mysqli_query($mysqli, $inscription)) {
 
                     
-                    header('Location: connexion.php');
+                    echo "Inscription reussie." ; // EN ATTENDANT HEADER LOCATION//
+
+                    // RAJOUTER HEADER LOCATION VERS CONNEXION
                 }
 
             }
