@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background-image: url("Assets/index1.jpg");
+    height: 1023px;
+}
