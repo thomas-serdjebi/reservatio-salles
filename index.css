@@ -60,7 +60,11 @@ main {
     overflow: hidden;
     position: absolute;
     left: 44.3%;
-    top: 122.6%;
+    top: 122.4%;
+    box-shadow: 
+    0 0 3px white,
+    0 0 6px #F2037C,
+    0 0 9px rgb(141, 141, 248);
 }
 
 .img_vr {
