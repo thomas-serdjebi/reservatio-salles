@@ -19,8 +19,8 @@
     <p id="p_neon2"> Une salle, pour une infinité d'expériences... </p>
     </div>
     <a href="reservation-form.php"><img id="bouton_reservation" height="220px" width="220px" src="Assets/bouton_reservation.png" alt="reservation"></a>
-
-    <div id="carroussel1"> 
+    
+    <div id="carroussel"> 
           <div class="img_vr">
             <img src="Assets/carroussel1.png" alt="vr1">
             <img src="Assets/carroussel2.png" alt="vr2">
