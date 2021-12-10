@@ -228,12 +228,13 @@
     <head>
         <meta charset="utf-8">
         <title>Profil</title>
-
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
     </head>
 
     <body>
 
-        <!-- RAJOUTER LE HEADER -->
+        <?php require("header.php"); ?>
 
         <main>
               
@@ -323,7 +324,7 @@
 
         </main>
 
-        <!-- RAJOUTER LE FOOTER  -->
+        <?php require("footer.php"); ?>
             
     </body>
 </html>

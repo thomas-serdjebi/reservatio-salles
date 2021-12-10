@@ -130,9 +130,12 @@
     <head>
         <meta charset="utf-8">
         <title>Inscription</title>
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
     </head>
-
     <body>
+
+        <?php require("header.php"); ?>
 
         <!-- RAJOUTER LA LE HEADER -->
 
@@ -199,7 +202,7 @@
             
         </main>
 
-        <!-- RAJOUTER LIEN VERS FOOTER  -->
+        <?php require("footer.php"); ?>
 
 
 

@@ -30,13 +30,13 @@ if (!empty($_GET)) {
 
         if(empty($title)) {
             $valid = false;
-            $err_title = "Veuillez renseigner le titre de l'évènement."
+            $err_title = "Veuillez renseigner le titre de l'évènement.";
             echo $err_title;
         }
 
         elseif (strlen($title)<45) {
             $valid = false;
-            $err_title = "Le titre ne doit pas dépasser 45 caractères."
+            $err_title = "Le titre ne doit pas dépasser 45 caractères.";
         }
 
         // VERIF SI LE TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
@@ -57,7 +57,7 @@ if (!empty($_GET)) {
 
         elseif (strlen($description)<500) {
             $valid = false;
-            $err_description = "La description ne doit pas dépasser 500 caractères".
+            $err_description = "La description ne doit pas dépasser 500 caractères.";
         }
 
 
@@ -114,12 +114,12 @@ if (!empty($_GET)) {
     <head>
         <meta charset="utf-8">
         <title>Réservation</title>
-
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
     </head>
-
     <body>
 
-        <!-- RAJOUTER LE HEADER -->
+        <?php require("header.php"); ?> 
 
         <main>
               
@@ -188,7 +188,7 @@ if (!empty($_GET)) {
 
         </main>
 
-        <!-- RAJOUTER LE FOOTER  -->
+        <?php require("footer.php"); ?>
             
     </body>
 </html>
