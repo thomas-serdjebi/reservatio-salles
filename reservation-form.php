@@ -4,49 +4,35 @@ session_start() ;
 
 require('connexiondb.php') ; 
 
-if (!empty($_GET)) {
-    extract($_GET);
+if (!empty($_POST)) {
+    extract($_POST);
     $valid = (boolean) true;        // UTILISATION DE LA VARIABLE VALIDE POUR RENDRE LES ERREURS 
 
 
-    // SIMPLIFICATION DES GETS
+    // SIMPLIFICATION DES POSTS
 
-    $title = $_GET['title'];
-    $description = $_GET['description'];
-    $day = $_GET['day'];
-    $hour = $_GET['hour'];
+    $login = $_POST['login'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $day = $_POST['day'];
+    $hour = $_POST['hour'];
 
     // RESERVER => VERIF DES ERREURS
 
-    if (isset($_GET['reserver'])) {
-
-        // REQUETE POUR VOIR SI TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
-
-        // $testtitle = mysqli_query($mysqli, "SELECT * FROM reservation-salles WHERE titre = $title") ;
-        
-        // $titlerows = mysqli_num_rows($testtile) ;
+    if (isset($_POST['reserver'])) {
 
         // ERREURS TITRE
 
         if(empty($title)) {
             $valid = false;
-            $err_title = "Veuillez renseigner le titre de l'évènement." ;
+            $err_title = "Veuillez renseigner le titre de l'évènement.";
             echo $err_title;
         }
 
         elseif (strlen($title)<45) {
             $valid = false;
-            $err_title = "Le titre ne doit pas dépasser 45 caractères." ;
+            $err_title = "Le titre ne doit pas dépasser 45 caractères.";
             echo $err_title;
-        }
-
-        // VERIF SI LE TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
-
-        elseif ($titlerows == 1 ) {
-           $err_title = "Un autre évènement ayant le même titre existe déjà. Etes vous certain de vouloir en créer un nouveau ?";
-           $valid = false;
-           echo $err_title;
-           //Afficher l'évènement en question ou créer un lien vers l'évènement ? voir avec valentin
         }
 
         // ERREURS DESCRIPTION
@@ -60,12 +46,12 @@ if (!empty($_GET)) {
         if (empty($description)) {
             $valid = false;
             $err_description = "Veuillez renseigner une description." ;
-            echo $err_description ;
+            echo $err_description;
         }
 
         elseif (strlen($description)<500) {
             $valid = false;
-            $err_description = "La description ne doit pas dépasser 500 caractères";
+            $err_description = "La description ne doit pas dépasser 500 caractères.";
             echo $err_description;
         }
 
@@ -155,12 +141,12 @@ if (!empty($_GET)) {
     <head>
         <meta charset="utf-8">
         <title>Réservation</title>
-
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
     </head>
-
     <body>
 
-        <!-- RAJOUTER LE HEADER -->
+        <?php require("header.php"); ?> 
 
         <main>
               
@@ -175,7 +161,7 @@ if (!empty($_GET)) {
 
                 <div class="formbox">
 
-                    <form action="reservation-form.php" method="get" class="styleform">
+                    <form action="reservation-form.php" method="post" class="styleform">
 
                         <div><input type="text" class="basicinput" name="title" placeholder="Titre de l'évènement"></div>
 
@@ -229,7 +215,7 @@ if (!empty($_GET)) {
 
         </main>
 
-        <!-- RAJOUTER LE FOOTER  -->
+        <?php require("footer.php"); ?>
             
     </body>
 </html>

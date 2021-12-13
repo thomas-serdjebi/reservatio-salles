@@ -63,14 +63,12 @@
     <head>
         <meta charset="utf-8">
         <title>Connexion</title>
-
-        
-
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
     </head>
-
     <body>
 
-        <!-- AJOUTER LE HEADER  -->
+        <?php require("header.php"); ?>
 
         <main>
 
@@ -125,7 +123,7 @@
             
         </main>
 
-        <!-- RAJOUTER LE FOOTER -->
+        <?php require("footer.php"); ?>
 
 
 
