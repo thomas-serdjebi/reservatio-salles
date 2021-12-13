@@ -30,24 +30,32 @@ if (!empty($_GET)) {
 
         if(empty($title)) {
             $valid = false;
-            $err_title = "Veuillez renseigner le titre de l'évènement."
+            $err_title = "Veuillez renseigner le titre de l'évènement." ;
             echo $err_title;
         }
 
         elseif (strlen($title)<45) {
             $valid = false;
-            $err_title = "Le titre ne doit pas dépasser 45 caractères."
+            $err_title = "Le titre ne doit pas dépasser 45 caractères." ;
+            echo $err_title;
         }
 
         // VERIF SI LE TITRE EXISTANT --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
 
-        // elseif ($titlerows == 1 ) {
-        //    $err_title = "Un autre évènement ayant le même titre existe déjà.";
-        //    $valid = false;
-        //    echo $err_title;
-        // }
+        elseif ($titlerows == 1 ) {
+           $err_title = "Un autre évènement ayant le même titre existe déjà. Etes vous certain de vouloir en créer un nouveau ?";
+           $valid = false;
+           echo $err_title;
+           //Afficher l'évènement en question ou créer un lien vers l'évènement ? voir avec valentin
+        }
 
         // ERREURS DESCRIPTION
+
+        //REQUETE POUR VOIR SI DESCRIPTION EXISTANTE --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
+
+        $testdesc = mysqli_query($mysqli, "SELECT * FROM reservations WHERE description = $description") ;
+        
+        $descrows = mysqli_num_rows($testdesc) ;
 
         if (empty($description)) {
             $valid = false;
@@ -57,8 +65,41 @@ if (!empty($_GET)) {
 
         elseif (strlen($description)<500) {
             $valid = false;
-            $err_description = "La description ne doit pas dépasser 500 caractères".
+            $err_description = "La description ne doit pas dépasser 500 caractères";
+            echo $err_description;
         }
+
+        // VERIF SI LA DESCRIPTION EXISTE --> VOIR AVEC VALENTIN SI COHERENT/UTILE DE FAIRE CETTE REQUETE
+
+        elseif ($descrows == 1 ) {
+            $valid = false ;
+            $err_description = "Cette description existe déjà. Etes vous certain de vouloir en créer un nouveau ?" ;
+            //Afficher l'évènement en question ou créer un lien vers l'évènement ? voir avec valentin
+            echo $err_description;
+        }
+
+        // VERIF JOUR ET HEURES
+
+        if($jour="" || empty($jour)) {
+            $valid = false;
+            $err_jour = "Veuillez sélectionner un jour pour votre évènement." ;
+            echo $err_jour;
+        }
+
+        if($heure="" || empty($heure)) {
+            $valid = false;
+            $err_heure = "Veuillez sélectionner un créneau pour votre évènement." ;
+            echo $err_heure;
+        }
+
+        // REQUETE POUR VOIR SI JOUR/CRENEAU DEJA PRIS
+
+        
+
+
+
+
+
 
 
 
