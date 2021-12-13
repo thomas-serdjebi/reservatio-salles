@@ -4,12 +4,9 @@ session_start() ;
 
 require('connexiondb.php') ; 
 
-$jour = date ('w') ; // numéro du jour actuel de 0(dimanche) à 6(samedi)
+$timestamp = strtotime($_POST['day']) + (14400);
 
-
-
-
-
+$fin = date('Y-m-d H:m', $timestamp);
 
 
 if (isset($_POST['reserver'])) {
@@ -25,14 +22,12 @@ if (isset($_POST['reserver'])) {
         $resultid = mysqli_fetch_assoc($sqlid);
 
         $id_utilisateur = $resultid['id'] ;
-
         
         
-        echo $fin;
 
         mysqli_query($mysqli, "INSERT INTO reservations (titre, description, debut, fin, id_utilisateur) 
-        VALUES ( '".$_POST['title']."', '".$_POST['description']."', '".$_POST['day']."', '".strtotime(($_POST['day'])+3600)."','".$id_utilisateur."' )");
-
+        VALUES ('".$_POST['title']."', '".$_POST['description']."', '".$_POST['day']."', '".$fin."','".$id_utilisateur."')");
+        echo $fin;
     }
 
 
