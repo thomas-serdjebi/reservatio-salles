@@ -149,10 +149,7 @@ if (isset($_POST['reserver'])) {
 
                 <?php if(isset($_SESSION['login'])) { ?>
 
-                    <p class="intro"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam odio, 
-                        tempore saepe repellat vel consequatur sit. Nihil earum expedita enim iure alias illum nisi 
-                        exercitationem architecto modi nesciunt. Voluptatum, aperiam? 
-                    </p>
+                    <p class="intro"> Vous pouvez réserver des créneaux d'une heure allant de 08:00 à 19:00 du lundi au vendredi.</p>
 
                     <div class="formbox">
 
