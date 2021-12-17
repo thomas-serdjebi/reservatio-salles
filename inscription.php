@@ -109,8 +109,8 @@
                 if (mysqli_query($mysqli, $inscription)) {
 
                     
-                    echo "Inscription réussie." ; // EN ATTENDANT HEADER LOCATION//
-
+                    $validation = "Inscription réussie, redirection vers la page de connexion en cours..." ; // EN ATTENDANT HEADER LOCATION//
+                    header("Refresh: 3; url=connexion.php");
                     // RAJOUTER HEADER LOCATION VERS CONNEXION
                 }
 
@@ -157,7 +157,11 @@
                     </p>
 
                 </div>
-
+                
+                <div class="errform">
+                    <?php if (isset($validation)) {echo $validation;} ?>
+                </div>
+                
                 <div class="formplace">
 
                     <!-- FORMULAIRE DINSCRIPTION -->

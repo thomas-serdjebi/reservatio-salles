@@ -76,15 +76,14 @@
             <section class="content">
 
                 <h1 class="titre">Connexion</h1>
-
+                
+                <?php if ($afficheform == 1)  { ?>
+                    
                 <p class="intro">
                     Utilise le formulaire ci-dessous pour te connecter.
                 </p>
 
                 <!-- FORMULAIRE DE CONNEXION -->
-
-
-                <?php if ($afficheform == 1)  { ?>
 
                 <form action="connexion.php" method="post" class="styleform">
 
@@ -114,9 +113,9 @@
 
                 <?php if ($afficheform == 0 ) { ?>
                 
-                <p class="text"> Tu es connecté ! </p><br>
+                <p class="errform"> Tu es connecté ! </p><br>
 
-                <p class="text"> N'hésite pas à modifier ton <a href="profil.php">profil</a>.<br>
+                <p class="errform"> N'hésite pas à modifier ton <a href="profil.php">profil</a>.<br>
 
 
 

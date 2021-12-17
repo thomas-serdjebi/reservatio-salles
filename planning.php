@@ -98,26 +98,34 @@
         <title>Planning</title>
         <link rel="stylesheet" href="header.css">
         <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="planning.css">
     </head>
 
     <body>
 
         <?php require('header.php') ; ?>
-
+        
+        <main>
         <div class="content">
 
 
 
             <h1 class="titre">Planning hebdomadaire</h1>
 
-            <div><p class="intro"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam odit ratione commodi id officiis veniam? Aut autem itaque totam facilis asperiores reprehenderit libero soluta maiores labore ex, ullam deserunt! </p></div>
+            <div>
+                <p class="intro"> Tu peux regarder ici le planning de la semaine, avec les horaires libres ou déjà réservés. 
+                                  Si la plage horaire est blanche, c'est libre ! Si c'est noir, un autre t'a déjà volé la place... 
+                                  Tu peux voir plus de détails sur sa réservation en cliquant sur la case associée. 
+                </p>
+            </div>
 
 
             <!-- // EN TETE PLANNING : MOIS + ANNEE -------- -->
 
             <br/>
 
-            <div id="titreMois">
+            <div id="titre_mois">
                 <h2><?php echo $nom_mois ; echo ' '; echo $annee;?></h2>
             </div>
 
@@ -188,6 +196,7 @@
             </table>
 
         </div>
+        </main>
 
         <?php require('footer.php');?>
     </body>
