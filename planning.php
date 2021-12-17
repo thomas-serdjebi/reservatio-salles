@@ -104,6 +104,8 @@
 
         <?php require('header.php') ; ?>
 
+        <main>
+
         <div class="content">
 
 
@@ -195,6 +197,8 @@
             </table>
 
         </div>
+
+        </main>
 
         <?php require('footer.php');?>
     </body>
