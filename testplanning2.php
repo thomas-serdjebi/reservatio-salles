@@ -100,96 +100,85 @@
         <link rel="stylesheet" href="footer.css">
     </head>
 
-    <body>
-
-        <?php require('header.php') ; ?>
-
-        <div class="content">
+    <?php require('header.php') ; ?>
 
 
 
-            <h1 class="titre">Planning hebdomadaire</h1>
+    <h1 class="titre">Planning hebdomadaire</h1>
 
-            <div><p class="intro"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam odit ratione commodi id officiis veniam? Aut autem itaque totam facilis asperiores reprehenderit libero soluta maiores labore ex, ullam deserunt! </p></div>
+    <div><p class="intro"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quisquam odit ratione commodi id officiis veniam? Aut autem itaque totam facilis asperiores reprehenderit libero soluta maiores labore ex, ullam deserunt! </p></div>
 
 
-            <!-- // EN TETE PLANNING : MOIS + ANNEE -------- -->
+    <!-- // EN TETE PLANNING : MOIS + ANNEE -------- -->
 
-            <br/>
+    <br/>
 
-            <div id="titreMois">
-                <h2><?php echo $nom_mois ; echo ' '; echo $annee;?></h2>
-            </div>
+    <div id="titreMois">
+        <h2><?php echo $nom_mois ; echo ' '; echo $annee;?></h2>
+    </div>
+
+    <?php 
+    
+    echo '<div id="titreMois" align="center">
+    <a href="testplanning2.php?week=pre&jour='.$jour.'"><<</a> Semaine '.$num_week.' <a href="testplanning2.php?week=next&jour='.$jour.'">>></a><br />
+    du '.$dateDebSemaineFr.' au '.$dateFinSemaineFr.'
+    </div>';
+    
+    ?>
+
+    <!-- // TABLEAU DU PLANNING  ----------------------------------------- -->
+
+    <table border=1 align="center";>
+        <thead>
+            <th></th>
+
+        <!-- // EN TETE AVEC JOURS SEMAINE EN COURS  -->
 
             <?php 
-            
-            echo '<div id="titreMois" align="center">
-            <a href="planning.php?week=pre&jour='.$jour.'"><<</a> Semaine '.$num_week.' <a href="planning.php?week=next&jour='.$jour.'">>></a><br />
-            du '.$dateDebSemaineFr.' au '.$dateFinSemaineFr.'
-            </div>';
-            
+
+                for($i =0 ;isset($semaine[$i]) && isset($jourTexte[$i]);$i++) {
+                    
+                    echo '<th>'.$jourTexte[$i].' '.$semaine[$i].'</th>';
+                    
+                }
             ?>
 
-            <!-- // TABLEAU DU PLANNING  ----------------------------------------- -->
+            </tr>
 
-            <table border=1 align="center";>
-                <thead>
-                    <th></th>
+        </thead>
 
-                <!-- // EN TETE AVEC JOURS SEMAINE EN COURS  -->
+        <tbody>
 
-                    <?php 
+            <?php // COLONNE HORAIRE
 
-                        for($i =0 ;isset($semaine[$i]) && isset($jourTexte[$i]);$i++) {
-                            
-                            echo '<th>'.$jourTexte[$i].' '.date("d", mktime(0,0,0,date("n"),date("d")-$jour+$i,date("y"))).'</th>';
-                            
-                        }
-                    ?>
+                for ($h=1; isset($plageH[$h]); $h++) {
 
-                    </tr>
+                    echo '<tr>';
+                    echo '<td>'.$plageH[$h].'</td>';
 
-                </thead>
+                    for ($j=0 ; isset($semaine[$j]); $j++) {
 
-                <tbody>
+                        echo '<td>';
 
-                    <?php // COLONNE HORAIRE
+                        foreach($planning as $value) {
+                            $debut = $value['debut'];
+                            $titre = $value['titre'];
+                            $login = $value['login'];
+                            $time = strtotime($debut);
+                            $jourdebut = date("d", $time);
+                            $heuredebut = date("H:00", $time);
 
-                        for ($h=1; isset($plageH[$h]); $h++) {
-
-                            echo '<tr>';
-                            echo '<td>'.$plageH[$h].'</td>';
-
-                            for ($j=0 ; isset($semaine[$j]); $j++) {
-
-                                echo '<td>';
-
-                                foreach($planning as $value) {
-                                    $debut = $value['debut'];
-                                    $titre = $value['titre'];
-                                    $login = $value['login'];
-                                    $time = strtotime($debut);
-                                    $jourdebut = date("d", $time);
-                                    $heuredebut = date("H:00", $time);
-
-                                    if ( ($jourdebut == $semaine[$j]) && ($heuredebut == $plageH[$h])) {
-                                        echo '<a href=reservation.php?val='.$value['id'].'>';
-                                        echo '<div class="titreevent">'.$titre.'</div>' ;
-                                        echo '<div class="loginevent">'.$login.'</div>' ;
-                                        echo '</a>';
-                                    }
-                                }
-
+                            if ( ($jourdebut == $semaine[$j]) && ($heuredebut == $plageH[$h])) {
+                                echo '<div class="titreevent">'.$titre.'</div>' ;
+                                echo '<div class="loginevent">'.$login.'</div>' ;
                             }
-                        } 
-                    ?>
-                    
-                </tbody>
-            </table>
+                        }
 
-        </div>
-
-        <?php require('footer.php');?>
-    </body>
+                    }
+                } 
+            ?>
+            
+        </tbody>
+    </table>
 
 </html>
