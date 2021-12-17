@@ -1,0 +1,54 @@
+main {
+    text-align:center;
+    width: 80%;
+    margin:auto;
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+.content {
+    display: flex;
+    flex-direction : row;
+}
+
+.titrejourheure {
+    display: flex;
+    flex-direction:column;
+    width:30%;
+    height:100px;
+    margin-right:5%;
+}
+
+.boxjourheure {
+    display: flex;
+    flex-direction:row;
+    height:120px;
+}
+
+.boxheure {
+    display: flex;
+    flex-direction:column;
+    width:50%;
+}
+
+.boxtitre {
+    border: 2px solid black;
+    height:80px;
+}
+
+.boxjour {
+    border: 2px solid black;
+    width:50%;
+}
+
+.boxheure {
+    border:2px solid black;
+}
+
+.boxdescription {
+    border: 2px solid black;
+    width:60%;
+    height:200px;
+    text-align:justify;
+}
+
