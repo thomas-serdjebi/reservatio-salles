@@ -12,12 +12,12 @@
 
     // CREATION AFFICHAGE SEMAINES PRECEDENTE/SUIVANTE ------------------------------------------------------
 
-    if (isset($_GET['week']) == "pre"){ // Si on veut afficher la semaine précédente
-        $jour = $jour - 7;
+    if ($_GET['week'] == "pre"){ // Si on veut afficher la semaine précédente
+        $jour = $jour + 7;
     }
 
-    elseif (isset($_GET['week']) == "next"){ // Si on veut afficher la semaine suivante
-        $jour = $jour + 7;
+    elseif ($_GET['week'] == "next"){ // Si on veut afficher la semaine suivante
+        $jour = $jour - 7;
     }
 
     $nom_mois = date("F"); // nom du mois actuel
@@ -48,8 +48,8 @@
     $thursday = date('d', strtotime('thursday this week'));
     $friday = date('d', strtotime('friday this week'));
 
-    $semaine = array($monday, $tuesday, $wednesday, $thursday, $friday);
-    $jourTexte =array('lundi', 'mardi', 'mercredi', 'jeudi','vendredi', 'samedi');
+    $semaine = array(0=> $monday, $tuesday, $wednesday, $thursday, $friday);
+    $jourTexte =array(0=>'lundi', 'mardi', 'mercredi', 'jeudi','vendredi', 'samedi');
 
     $huit = '08:00';
     $neuf = '09:00';
@@ -132,7 +132,9 @@
             <?php 
             
             echo '<div id="titreMois" align="center">
-            <a href="planning.php?week=pre&jour='.$jour.'"><<</a> Semaine '.$num_week.' <a href="planning.php?week=next&jour='.$jour.'">>></a><br />
+            <a href="planning.php?week=pre&jour='.$jour.'"> << </a> 
+            Semaine '.$num_week.' 
+            <a href="planning.php?week=next&jour='.$jour.'"> >> </a><br />
             du '.$dateDebSemaineFr.' au '.$dateFinSemaineFr.'
             </div>';
             
@@ -150,7 +152,8 @@
 
                         for($i =0 ;isset($semaine[$i]) && isset($jourTexte[$i]);$i++) {
                             
-                            echo '<th>'.$jourTexte[$i].' '.date("d", mktime(0,0,0,date("n"),date("d")-$jour+$i,date("y"))).'</th>';
+                            $weekdate = date("d", mktime(0,0,0,date("n"),date("d")-$jour+$i+1,date("y")));
+                            echo '<th>'.$jourTexte[$i].' '.$weekdate.'</th>';
                             
                         }
                     ?>
@@ -170,6 +173,8 @@
 
                             for ($j=0 ; isset($semaine[$j]); $j++) {
 
+                                $weekdate = date("d-m-y", mktime(0,0,0,date("n"),date("d")-$jour+$j+1,date("y")));
+
                                 echo '<td>';
 
                                 foreach($planning as $value) {
@@ -177,10 +182,12 @@
                                     $titre = $value['titre'];
                                     $login = $value['login'];
                                     $time = strtotime($debut);
-                                    $jourdebut = date("d", $time);
+                                    $jourdebut = date("d-m-y", $time);
                                     $heuredebut = date("H:00", $time);
 
-                                    if ( ($jourdebut == $semaine[$j]) && ($heuredebut == $plageH[$h])) {
+                                    
+
+                                    if ( ($jourdebut == $weekdate) && ($heuredebut == $plageH[$h]))  {
                                         echo '<a href=reservation.php?val='.$value['id'].'>';
                                         echo '<div class="titreevent">'.$titre.'</div>' ;
                                         echo '<div class="loginevent">'.$login.'</div>' ;
