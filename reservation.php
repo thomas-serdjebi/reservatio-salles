@@ -45,6 +45,12 @@ $fin = date("H:00", $hfin);
 
         <main>
 
+            
+
+            
+
+            <?php if (isset($_SESSION['login'])) { ?>
+
             <section class="content">
 
                 <div class="titrejourheure">
@@ -70,7 +76,35 @@ $fin = date("H:00", $hfin);
                     <?php echo $data['description'] ?>
                 </div>
 
-            </section>  
+            </section>
+
+            <?php } 
+                
+            else { ?> 
+
+                <section class="nocontent">
+
+                        
+                    <p class="intro">Vous devez vous connecter pour consulter une réservation. </br>
+                        Si vous n'avez pas de compte, inscrivez vous.
+                    </p>
+
+                    <form action='inscription.php' method='get'>
+                        <button type='submit' class='submitbtn'>Inscription</button>
+                    </form>
+                
+
+                
+                    <form action='connexion.php' method='get'>
+                        <button type='submit' class='submitbtn'>Connexion</button>      
+                    </form>
+                </section>
+            
+            
+
+            <?php } ?>
+
+              
 
         </main>
 
