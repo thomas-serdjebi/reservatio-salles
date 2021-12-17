@@ -2,6 +2,8 @@
 
 require ('connexiondb.php');
 
+session_start();
+
 
 $sql = mysqli_query($mysqli, "SELECT titre, description, debut, fin FROM reservations WHERE reservations.id = '".@$_GET['val']."'");
 
