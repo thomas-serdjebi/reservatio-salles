@@ -18,15 +18,13 @@ if (isset($_POST['reserver'])) {
 
     if (empty($_POST['title'])) {    
         $valid = false;
-        $err_title = "Veuillez renseigner le titre de l'évènement.";
-        echo $err_title;
+        $err_title = "Renseigne le titre de l'évènement s'il te plaît.";
         $_POST['title'] = "";
     }
 
     elseif (strlen($_POST['title'])>50) {
         $valid = false;
-        $err_title = "Le titre de votre évènement ne doit pas dépasser 50 caractères.";
-        echo $err_title;
+        $err_title = "Le titre de ton évènement ne doit pas dépasser 50 caractères.";
         $_POST['title'] = "";
     }
 
@@ -34,15 +32,13 @@ if (isset($_POST['reserver'])) {
 
     if (empty($_POST['description'])) {
         $valid = false;
-        $err_description = "Veuillez remplir la description de votre évènement.";
-        echo $err_description;
+        $err_description = "Tu dois remplir la description de ton évènement.";
         $_POST['description'] = "";
     }
 
     elseif (strlen($_POST['description'])>500) {
         $valid = false;
         $err_description = "La description ne doit pas dépasser 500 caractères.";
-        echo $err_description ;
         $_POST['description'] = "";
     }
 
@@ -57,8 +53,7 @@ if (isset($_POST['reserver'])) {
 
     if ($requete == 1) {
         $valid = false;
-        $err_indisponible = "Ce créneau n'est pas disponible. Veuillez choisir une autre disponibilité.";
-        echo $err_indisponible;
+        $err_indisponible = "Ce créneau n'est pas disponible. Choisis une autre disponibilité.";
         $_POST['day']="";
     }
 
@@ -66,8 +61,7 @@ if (isset($_POST['reserver'])) {
 
     if ($day < $today) {
         $valid = false;
-        $err_indisponible = "Vous ne pouvez pas réserver de date antérieure à celle du jour." ;
-        echo $err_indisponible;
+        $err_indisponible = "Tu ne peux pas réserver de date antérieure à celle du jour." ;
         $_POST['day']="";
     }
 
@@ -81,9 +75,7 @@ if (isset($_POST['reserver'])) {
     if ($array['wday'] == 6 || $array['wday'] == 7) {
         $valid = false;
         $err_indisponible = "Le créneau doit être choisi du lundi au vendredi.";
-        echo $err_indisponible;
         $_POST['day']="";
-    
     }
     
     // VERIF SI ENTRE 8 ET 19H
@@ -91,7 +83,6 @@ if (isset($_POST['reserver'])) {
     if ( $array['hours'] < 8 || $array['hours']>19) {
         $valid = false;
         $err_indisponible = "Le créneau doit être choisi entre 8:00 et 19:00";
-        echo $err_indisponible;
         $_POST['day']="";
     }
 
@@ -135,6 +126,7 @@ if (isset($_POST['reserver'])) {
         <title>Réservation</title>
         <link rel="stylesheet" href="header.css">
         <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
@@ -145,13 +137,13 @@ if (isset($_POST['reserver'])) {
             <section class="content">
 
 
-                <h1 class="titre">Réservation</h1>
+                <h1 class="titre">RÉSERVATION</h1>
 
                 <?php if(isset($_SESSION['login'])) { ?>
 
-                    <p class="intro"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam odio, 
-                        tempore saepe repellat vel consequatur sit. Nihil earum expedita enim iure alias illum nisi 
-                        exercitationem architecto modi nesciunt. Voluptatum, aperiam? 
+                    <p class="intro"> Alors, tu es décidé à réserver ton aventure chez VIRTUALROOM ? <br>
+                                      Utilise le formulaire ci-dessous pour ça. <br>
+                                      PS : Nous sommes ouverts du lundi au vendredi de 08H à 19H. 
                     </p>
 
                     <div class="formbox">
@@ -163,7 +155,7 @@ if (isset($_POST['reserver'])) {
                             <div><input type="text" class="basicinput" name="title" placeholder="Titre de l'évènement" value=<?php if(isset($_POST['title'])) {echo $_POST['title'];}?>></div>
 
                             <div class="errform"><?php if (isset($err_description)) { echo $err_description ;} ?></div>
-                            <div><input type="text" class="textinput" name="description" placeholder="Description"  value=<?php if (isset($_POST['description'])){echo $_POST['description'];}?>></div>
+                            <div><textarea class="textinput" name="description" placeholder="Description"  value=<?php if (isset($_POST['description'])){echo $_POST['description'];}?>></textarea></div>
 
                             <!-- AJOUTER UN COMPTEUR DE CARACTERES -->
 
@@ -180,16 +172,14 @@ if (isset($_POST['reserver'])) {
 
                 <?php if (!isset($_SESSION['login'])) { ?>
 
-                    <p class="intro">Vous devez vous connecter pour réserver un créneau. </br>
-                        Si vous n'avez pas de compte, inscrivez vous.
+                    <p class="intro">Tu dois te connecter pour réserver un créneau. </br>
+                        Si tu n'as pas de compte, inscris-toi !
                     </p>
 
                     <form action='inscription.php' method='get'>
                             <button type='submit' class='submitbtn'>Inscription</button>
-                        </form>
-                    
-
-                    
+                    </form>
+                
                     <form action='connexion.php' method='get'>
                         <button type='submit' class='submitbtn'>Connexion</button>      
                     </form>

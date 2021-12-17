@@ -20,7 +20,7 @@
 
         if (empty($login)) {
 
-            $err_login = "Veuillez renseigner votre login.";
+            $err_login = "Renseigne ton login s'il te plaît.";
             $valid = false;
             
         }
@@ -29,7 +29,7 @@
 
         if (empty($mdp)) {
 
-            $err_mdp = "Veuillez renseigner votre mot de passe.";
+            $err_mdp = "Renseigne ton mot de passe s'il te plaît.";
             $valid = false;
         }
 
@@ -65,6 +65,7 @@
         <title>Connexion</title>
         <link rel="stylesheet" href="header.css">
         <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
 
@@ -76,6 +77,10 @@
 
                 <h1 class="titre">Connexion</h1>
 
+                <p class="intro">
+                    Utilise le formulaire ci-dessous pour te connecter.
+                </p>
+
                 <!-- FORMULAIRE DE CONNEXION -->
 
 
@@ -83,13 +88,13 @@
 
                 <form action="connexion.php" method="post" class="styleform">
 
-                    <div class="formerror"><?php if (isset($err_login)) { echo  $err_login ;} ?></div>
+                    <div class="errform"><?php if (isset($err_login)) { echo $err_login ;} ?></div>
                     <div><input type="text" class="basicinput" name="login" placeholder="Login"></div>
                     
-                    <div class="formerror"><?php if (isset($err_mdp)) { echo $err_mdp;} ?></div>
+                    <div class="errform"><?php if (isset($err_mdp)) { echo $err_mdp ;} ?></div>
                     <div><input type="password" class="basicinput" name="mdp" placeholder="Mot de passe"></div>
 
-                    <div class="formerror"><?php if (isset($err_connexion)) { echo $err_connexion ;}?> </div>
+                    <div class="errform"><?php if (isset($err_connexion)) { echo $err_connexion ;} ?></div>
                     <div><input type="submit" class="submitbtn" id="connexion" name="connexion" value="Connexion"><br></div>
 
                 </form>
