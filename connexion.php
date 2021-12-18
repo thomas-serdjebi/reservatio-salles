@@ -75,7 +75,7 @@
 
             <section class="content">
 
-                <h1 class="titre">Connexion</h1>
+                <h1 class="titre">CONNEXION</h1>
                 
                 <?php if ($afficheform == 1)  { ?>
                     

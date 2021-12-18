@@ -49,7 +49,7 @@
     $friday = date('d', strtotime('friday this week'));
 
     $semaine = array(0=> $monday, $tuesday, $wednesday, $thursday, $friday);
-    $jourTexte =array(0=>'lundi', 'mardi', 'mercredi', 'jeudi','vendredi', 'samedi');
+    $jourTexte =array(0=>'Lundi', 'Mardi', 'Mercredi', 'Jeudi','Vendredi', 'Samedi');
 
     $huit = '08:00';
     $neuf = '09:00';
@@ -111,12 +111,12 @@
 
 
 
-            <h1 class="titre">Planning hebdomadaire</h1>
+            <h1 class="titre">PLANNING HEBDOMADAIRE</h1>
 
             <div>
                 <p class="intro"> Tu peux regarder ici le planning de la semaine, avec les horaires libres ou déjà réservés. 
-                                  Si la plage horaire est blanche, c'est libre ! Si c'est noir, un autre t'a déjà volé la place... 
-                                  Tu peux voir plus de détails sur sa réservation en cliquant sur la case associée. 
+                                  Si la plage horaire est <b>blanche</b>, c'est libre !
+                                  Tu peux voir plus de détails sur les réservations en cliquant dessus. 
                 </p>
             </div>
 
@@ -132,9 +132,9 @@
             <?php 
             
             echo '<div id="titreMois" align="center">
-            <a href="planning.php?week=pre&jour='.$jour.'"> << </a> 
+            <a class="fleche" href="planning.php?week=pre&jour='.$jour.'"> << </a> 
             Semaine '.$num_week.' 
-            <a href="planning.php?week=next&jour='.$jour.'"> >> </a><br />
+            <a class="fleche" href="planning.php?week=next&jour='.$jour.'"> >> </a><br />
             du '.$dateDebSemaineFr.' au '.$dateFinSemaineFr.'
             </div>';
             
@@ -142,7 +142,7 @@
 
             <!-- // TABLEAU DU PLANNING  ----------------------------------------- -->
 
-            <table border=1 align="center";>
+            <table class="table" align="center">
                 <thead>
                     <th></th>
 
@@ -153,7 +153,7 @@
                         for($i =0 ;isset($semaine[$i]) && isset($jourTexte[$i]);$i++) {
                             
                             $weekdate = date("d", mktime(0,0,0,date("n"),date("d")-$jour+$i+1,date("y")));
-                            echo '<th>'.$jourTexte[$i].' '.$weekdate.'</th>';
+                            echo '<th id="t_head">'.$jourTexte[$i].' '.$weekdate.'</th>';
                             
                         }
                     ?>
@@ -166,16 +166,15 @@
 
                     <?php // COLONNE HORAIRE
 
-                        for ($h=1; isset($plageH[$h]); $h++) {
-
+                        for ($h=1; isset($plageH[$h]); $h++) { 
                             echo '<tr>';
-                            echo '<td>'.$plageH[$h].'</td>';
+                            echo '<td id="plage_h">'.$plageH[$h].'</td>';
 
                             for ($j=0 ; isset($semaine[$j]); $j++) {
 
                                 $weekdate = date("d-m-y", mktime(0,0,0,date("n"),date("d")-$jour+$j+1,date("y")));
 
-                                echo '<td>';
+                                echo '<td id="empty_td">';
 
                                 foreach($planning as $value) {
                                     $debut = $value['debut'];
@@ -188,7 +187,7 @@
                                     
 
                                     if ( ($jourdebut == $weekdate) && ($heuredebut == $plageH[$h]))  {
-                                        echo '<a href=reservation.php?val='.$value['id'].'>';
+                                        echo '<a id="lienevent" href=reservation.php?val='.$value['id'].'>';
                                         echo '<div class="titreevent">'.$titre.'</div>' ;
                                         echo '<div class="loginevent">'.$login.'</div>' ;
                                         echo '</a>';
@@ -208,6 +207,7 @@
         </main>
 
         <?php require('footer.php');?>
+    
     </body>
 
 </html>

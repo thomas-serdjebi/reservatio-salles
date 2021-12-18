@@ -34,12 +34,12 @@
 
         if (isset($_POST['loginform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
 
-            $openlogin = 1 ;  
+            $openlogin == 1 ;  
         }    
 
         if (isset($_POST['modiflogin'])) {
 
-            $openlogin = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
+            $openlogin == 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
 
             // VARIABLES DU POST
 
@@ -101,7 +101,7 @@
                 if(mysqli_query($mysqli, $requestlogin)) {
                   
                     $newloginok = "Le nouveau login a bien été enregistré.";
-                    $openlogin = 0;                                          // FERME LE FORMULAIRE LOGIN SI MODIF OK
+                    $openlogin == 0;                                          // FERME LE FORMULAIRE LOGIN SI MODIF OK
                     $_SESSION['login'] = $newlogin;     
                                                                    
                     
@@ -122,13 +122,13 @@
 
         if (isset($_POST['mdpform'])) {                                                       // AFFICHAGE DU FORMULAIRE DU Login
 
-            $openmdp = 1 ;  
+            $openmdp == 1 ;  
         }    
 
         if (isset($_POST['modifmdp'])) {
 
 
-            $openmdp = 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
+            $openmdp == 1 ;                                                                    // GARDE LE FORMULAIRE OUVERT SI ERREURS
 
             // VARIABLES DU POST
 
@@ -207,7 +207,7 @@
                 if(mysqli_query($mysqli, $requestmdp)) {
                     $newmdpok = "Le mot de passe a bien été modifié";
                     
-                    $openmdp = 0;                                                             // FERME LE FORMULAIRE MDP SI MODIF OK
+                    $openmdp == 0;                                                             // FERME LE FORMULAIRE MDP SI MODIF OK
                 }
 
                 else {                               // AFFICHE LERREUR SI BUG
@@ -248,6 +248,8 @@
                 <br>T'as de la chance, tu vas pouvoir le faire avec les jolis boutons ci-dessous. 
                 </p>
 
+                <div class="errform"><?php if(isset($err_connexion)) { echo $err_connexion;} ?></div>
+                
                 <!-- FORMULAIRE DE MODIFICATION LOGIN -->
                 
                 <div class="boxmodif">
