@@ -4,7 +4,6 @@ require ('connexiondb.php');
 
 session_start();
 
-
 $sql = mysqli_query($mysqli, "SELECT titre, description, debut, fin FROM reservations WHERE reservations.id = '".@$_GET['val']."'");
 
 $data = mysqli_fetch_assoc($sql);
@@ -48,9 +47,9 @@ $fin = date("H:00", $hfin);
 
         <main>
 
-            
+            <h1 class="titre">VOIR UNE RÉSERVATION</h1>
 
-            
+            <p class="intro"> Tu peux voir ici les détails d'une réservation.  </p>
 
             <?php if (isset($_SESSION['login'])) { ?>
 
