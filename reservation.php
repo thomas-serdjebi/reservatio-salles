@@ -36,9 +36,10 @@ $fin = date("H:00", $hfin);
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Planning</title>
+        <title>Voir une réservation</title>
         <link rel="stylesheet" href="header.css">
         <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="reservation.css">
     </head>
     <body>
@@ -87,8 +88,8 @@ $fin = date("H:00", $hfin);
                 <section class="nocontent">
 
                         
-                    <p class="intro">Vous devez vous connecter pour consulter une réservation. </br>
-                        Si vous n'avez pas de compte, inscrivez vous.
+                    <p class="intro">Tu dois être connecté pour consulter une réservation. </br>
+                        Si tu n'as pas de compte, inscris toi.
                     </p>
 
                     <form action='inscription.php' method='get'>
