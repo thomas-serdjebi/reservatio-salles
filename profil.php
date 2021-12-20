@@ -2,9 +2,7 @@
 
     session_start();
 
-    
-
-    require('connexiondb.php');
+    require('connexiondb.php'); // CONNEXION A LA BDD
 
     $newlogin="";
     $confirmlogin= "";
@@ -12,20 +10,11 @@
     $newmdp ="";
     $confirmmdp ="";
 
-
-
-   
-
     if (!isset($_SESSION['login'])) {                                                       // SI PAS DUTILISATEUR CONNECTE
-        $err_connexion = "Tu dois te connecter pour accéder à cette page, redirection en cours..." ;
-        header("Refresh: 3; url=connexion.php");
-
+        header("Refresh: 0; url=connexion.php");
     } 
 
     else { 
-
-        require ('connexiondb.php'); // CONNEXION A LA BDD
-
 
         // PARTIE LOGIN ----------------------------------------------------------------------------------------------------
 

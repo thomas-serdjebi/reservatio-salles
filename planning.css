@@ -16,11 +16,14 @@
     text-decoration: none;
     color: black;
     font-family: 'Nova Round';
+   
 }
 
 table {
     border: 4mm ridge rgba(0, 0, 0, 0.6);
     opacity: 0.8;
+    width: 60%;
+    margin-bottom: 60px;
 }
 
 thead {
