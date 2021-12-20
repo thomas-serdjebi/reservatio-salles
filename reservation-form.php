@@ -111,6 +111,8 @@ if (isset($_POST['reserver'])) {
         
 
         mysqli_query($mysqli, "INSERT INTO reservations (titre, description, debut, fin, id_utilisateur) VALUES ('".$_POST['title']."', '".$_POST['description']."', '".$_POST['day']."', '".$newtime."','".$id_utilisateur."')");
+
+        $reservationok = "Ta réservation a bien été prise en compte.";
         
         
     }
@@ -141,9 +143,9 @@ if (isset($_POST['reserver'])) {
 
                 <?php if(isset($_SESSION['login'])) { ?>
 
-                    <p class="intro"> Alors, tu es décidé à réserver ton aventure chez VIRTUALROOM ? <br>
-                                      Utilise le formulaire ci-dessous pour ça. <br>
-                                      PS : Nous sommes ouverts du lundi au vendredi de 08H à 19H. 
+                    <p class="intro"> 
+                        Alors, tu es décidé à réserver ton aventure chez VIRTUALROOM ? <br>
+                        Choisis un créneau d'une heure fixe du lundi au vendredi de 08:00 à 19:00. <br>
                     </p>
 
                     <div class="formbox">
@@ -168,7 +170,9 @@ if (isset($_POST['reserver'])) {
 
                     </div>
 
-                <?php } ?>
+                <?php }  ?>
+                
+                <p class="intro"><?php if (isset($reservationok)) { echo $reservationok; } ?></p>
 
                 <?php if (!isset($_SESSION['login'])) { ?>
 

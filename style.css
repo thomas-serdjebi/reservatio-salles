@@ -73,6 +73,20 @@ textarea{
     0 0 24px blue;
 }
 
+.reglesmodifs {
+
+    font-family: 'Raleway';
+    font-size: 20px;
+    color: rgb(255, 253, 253);
+    text-shadow: 
+    0 0 2px white,
+    0 0 6px white,
+    0 0 12px white,    
+    0 0 24px blue;
+
+
+}
+
 .submitbtn {
     border: 4px white inset;
     background-color: #292929;

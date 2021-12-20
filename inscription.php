@@ -151,8 +151,8 @@
                 <div> 
 
                     <p class="intro">
-                    Utilise le formulaire ci-dessous pour rejoindre l'aventure.
-                    <br> Login : uniquement en lettres miniscules ou chiffres, sans caractères spéciaux, 25 caractères maximum.
+                    Utilise le formulaire ci-dessous pour rejoindre l'aventure.</p>
+                    <br><p class="reglesmodifs"> Login : uniquement en lettres miniscules ou chiffres, sans caractères spéciaux, 25 caractères maximum.
                     <br> Mot de passe : entre 8 et 20 caractères, avec au moins 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.
                     </p>
 

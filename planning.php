@@ -1,9 +1,18 @@
 <?php
+
+    session_start();
     require('connexiondb.php');
+
+    if (isset($_GET['']))
+    
 
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
 
     $jour = date("w"); // numéro du jour actuel
+
+    if (isset($_GET['reserver'])) {
+        header ('Location: reservation-form.php');
+    }
 
     if (isset($_GET['jour'])){
         $jour = intval($_GET['jour']);
@@ -113,12 +122,7 @@
 
             <h1 class="titre">PLANNING HEBDOMADAIRE</h1>
 
-            <div>
-                <p class="intro"> Tu peux regarder ici le planning de la semaine, avec les horaires libres ou déjà réservés. 
-                                  Si la plage horaire est <b>blanche</b>, c'est libre !
-                                  Tu peux voir plus de détails sur les réservations en cliquant dessus. 
-                </p>
-            </div>
+
 
 
             <!-- // EN TETE PLANNING : MOIS + ANNEE -------- -->
@@ -202,7 +206,14 @@
             </table>
 
         </div>
-        </main>
+
+        <?php if (isset($_SESSION['login'])) { ?>
+
+        <form action='planning.php' method='get'>
+            <button type='submit' class='submitbtn' name="reserver">Réserver</button>      
+        </form>
+
+        <?php } ?>
 
         </main>
 
