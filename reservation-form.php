@@ -1,6 +1,122 @@
 <?php
 
-session_start()
+session_start() ;
+
+require('connexiondb.php') ; 
+
+// VERIF SI CONNECTE
+
+
+$today = date('Y-m-d H:i', time() + 60*60); //heure du jour avec heure d'hiver
+
+
+if (isset($_POST['reserver'])) {
+
+    $valid = (boolean) true ;
+
+    // VERIF DES ERREURS DU TITRE : VIDE, 50 CARACTERES MAX
+
+    if (empty($_POST['title'])) {    
+        $valid = false;
+        $err_title = "Renseigne le titre de l'évènement s'il te plaît.";
+        $_POST['title'] = "";
+    }
+
+    elseif (strlen($_POST['title'])>50) {
+        $valid = false;
+        $err_title = "Le titre de ton évènement ne doit pas dépasser 50 caractères.";
+        $_POST['title'] = "";
+    }
+
+    // VERIF DES ERREURS DE LA DESCRIPTION : VIDE, 500 CARACTERES MAX
+
+    if (empty($_POST['description'])) {
+        $valid = false;
+        $err_description = "Tu dois remplir la description de ton évènement.";
+        $_POST['description'] = "";
+    }
+
+    elseif (strlen($_POST['description'])>500) {
+        $valid = false;
+        $err_description = "La description ne doit pas dépasser 500 caractères.";
+        $_POST['description'] = "";
+    }
+
+    // VERIF SI CRENEAU DEJA PRIS
+
+    $day = $_POST['day'];
+
+
+    $sql = "SELECT * from reservations WHERE debut = '".$day."'";
+    
+    $requete = mysqli_num_rows(mysqli_query($mysqli, $sql));
+
+    if ($requete == 1) {
+        $valid = false;
+        $err_indisponible = "Ce créneau n'est pas disponible. Choisis une autre disponibilité.";
+        $_POST['day']="";
+    }
+
+    // VERIF SI CRENEAU EST ANTERIEUR 
+
+    if ($day < $today) {
+        $valid = false;
+        $err_indisponible = "Tu ne peux pas réserver de date antérieure à celle du jour." ;
+        $_POST['day']="";
+    }
+
+    // VERIF SI ENTRE 8H et 19H et LUNDI AU VENDREDI
+
+    $getdate = strtotime($day);
+    $array = getdate($getdate);
+
+    // VERIF SI SAMEDI OU DIMANCHE 
+
+    if ($array['wday'] == 6 || $array['wday'] == 7) {
+        $valid = false;
+        $err_indisponible = "Le créneau doit être choisi du lundi au vendredi.";
+        $_POST['day']="";
+    }
+    
+    // VERIF SI ENTRE 8 ET 19H
+
+    if ( $array['hours'] < 8 || $array['hours']>19) {
+        $valid = false;
+        $err_indisponible = "Le créneau doit être choisi entre 8:00 et 19:00";
+        $_POST['day']="";
+    }
+
+
+
+    // SI PAS DERREUR ALORS EXECUTION RESERVATION
+
+    
+
+    if ($valid) {
+
+        // REQUETE RECUPERATION ID UTILISATEUR
+
+        $sqlid = mysqli_query($mysqli, "SELECT id FROM utilisateurs WHERE login = '".$_SESSION['login']."'");
+
+        $resultid = mysqli_fetch_assoc($sqlid);
+
+        $id_utilisateur = $resultid['id'] ;
+
+        
+
+        $currenttime = $_POST['day'];
+        $newtime = strtotime($currenttime . "+1hours");
+        $newtime = date('Y-m-d H:i', $newtime) ;
+        
+        
+
+        mysqli_query($mysqli, "INSERT INTO reservations (titre, description, debut, fin, id_utilisateur) VALUES ('".$_POST['title']."', '".$_POST['description']."', '".$_POST['day']."', '".$newtime."','".$id_utilisateur."')");
+        
+        
+    }
+
+
+}
 
 ?>
 
@@ -8,77 +124,75 @@ session_start()
     <head>
         <meta charset="utf-8">
         <title>Réservation</title>
-
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="style.css">
     </head>
-
     <body>
 
-        <!-- RAJOUTER LE HEADER -->
+        <?php require("header.php"); ?> 
 
         <main>
               
             <section class="content">
 
-                <h1 class="titre">Réservation</h1>
 
-                <p class="intro"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam odio, 
-                    tempore saepe repellat vel consequatur sit. Nihil earum expedita enim iure alias illum nisi 
-                    exercitationem architecto modi nesciunt. Voluptatum, aperiam? 
-                </p>
+                <h1 class="titre">RÉSERVATION</h1>
 
-                <div class="formbox">
+                <?php if(isset($_SESSION['login'])) { ?>
 
-                    <form action="reservation-form.php" method="get" class="styleform">
+                    <p class="intro"> Alors, tu es décidé à réserver ton aventure chez VIRTUALROOM ? <br>
+                                      Utilise le formulaire ci-dessous pour ça. <br>
+                                      PS : Nous sommes ouverts du lundi au vendredi de 08H à 19H. 
+                    </p>
 
-                        <div><input type="text" class="basicinput" name="titre" placeholder="Titre de l'évènement"></div>
+                    <div class="formbox">
 
-                        <div><input type="text" class="textinput" name="description" placeholder="Description"></div>
+                        <form action="reservation-form.php" method="post" class="styleform">
 
-                        <div>
 
-                            <select class="selectinput" name="day">
+                            <div class="errform"><?php if (isset($err_title)) { echo $err_title ;} ?></div>
+                            <div><input type="text" class="basicinput" name="title" placeholder="Titre de l'évènement" value=<?php if(isset($_POST['title'])) {echo $_POST['title'];}?>></div>
 
-                                <option value="">Sélectionnez un jour</option>
-                                <option valeur="lundi">lundi</option>
-                                <option valeur="mardi">mardi</option>
-                                <option valeur="mercredi">mercredi</option>
-                                <option valeur="jeudi">jeudi</option>
-                                <option valeur="vendredi">vendredi</option>
+                            <div class="errform"><?php if (isset($err_description)) { echo $err_description ;} ?></div>
+                            <div><textarea class="textinput" name="description" placeholder="Description"  value=<?php if (isset($_POST['description'])){echo $_POST['description'];}?>></textarea></div>
 
-                            </select>
+                            <!-- AJOUTER UN COMPTEUR DE CARACTERES -->
 
-                        </div>
+                            <div class="errform"><?php if (isset($err_indisponible)) { echo $err_indisponible ;} ?></div>
+                            <div><input type= "datetime-local" name="day" step="3600"></div>
 
-                        <div>
-                            
-                            <select class="selectinput" name="hour">
+                            <input type="submit" name="reserver" value="Réserver" class="submitbtn">
 
-                                <option value="">Sélectionnez un créneau horaire</option>
-                                <option valeur="08-09">08H à 09H</option>
-                                <option valeur="09-10">09H à 10H</option>
-                                <option valeur="10-11">10H à 11H</option>
-                                <option valeur="11-12">11H à 12H</option>
-                                <option valeur="12-13">12H à 13H</option>
-                                <option valeur="13-14">13H à 14H</option>
-                                <option valeur="15-16">14H à 15H</option>
-                                <option valeur="17-18">15H à 16H</option>
-                                <option valeur="18-19">16H à 17H</option>
-                                <option valeur="18-19">17H à 18H</option>
-                                <option valeur="18-19">18H à 19H</option>
+                        </form>
 
-                            </select>
+                    </div>
 
-                        </div>
+                <?php } ?>
 
+                <?php if (!isset($_SESSION['login'])) { ?>
+
+                    <p class="intro">Tu dois te connecter pour réserver un créneau. </br>
+                        Si tu n'as pas de compte, inscris-toi !
+                    </p>
+
+                    <form action='inscription.php' method='get'>
+                            <button type='submit' class='submitbtn'>Inscription</button>
+                    </form>
+                
+                    <form action='connexion.php' method='get'>
+                        <button type='submit' class='submitbtn'>Connexion</button>      
                     </form>
 
-                </div>
+                <?php } ?>
+                
+                
 
             </section>
 
         </main>
 
-        <!-- RAJOUTER LE FOOTER  -->
+        <?php require("footer.php"); ?>
             
     </body>
 </html>
