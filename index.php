@@ -22,11 +22,11 @@
     
     <div id="carroussel"> 
           <div class="img_vr">
-            <img src="Assets/carroussel1.png" alt="vr1">
-            <img src="Assets/carroussel2.png" alt="vr2">
-            <img src="Assets/carroussel3.png" alt="vr3">
-            <img src="Assets/carroussel4.png" alt="vr4">
-            <img src="Assets/carroussel5.png" alt="vr5">
+            <img src="Assets/carroussel1.PNG" alt="vr1">
+            <img src="Assets/carroussel2.PNG" alt="vr2">
+            <img src="Assets/carroussel3.PNG" alt="vr3">
+            <img src="Assets/carroussel4.PNG" alt="vr4">
+            <img src="Assets/carroussel5.PNG" alt="vr5">
           </div>
     </div>
 </main>

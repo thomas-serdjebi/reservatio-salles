@@ -22,13 +22,13 @@
 
                 <div class="footersocialboxes">
 
-                    <div><a href="https://www.facebook.com/LaPlateformeIO" target="_blank"><img src="Assets/logo_fb.JPG" alt="logofacebook"  class="logosocial"></a></div>
+                    <div><a href="https://www.facebook.com/LaPlateformeIO" target="_blank"><img src="Assets/logo_fb.jpg" alt="logofacebook"  class="logosocial"></a></div>
 
-                    <div><a href="https://www.linkedin.com/school/laplateformeio/" target="_blank"><img src="Assets/logo_linkedin.JPG" alt="logolinkedin" class="logosocial"></a></div>
+                    <div><a href="https://www.linkedin.com/school/laplateformeio/" target="_blank"><img src="Assets/logo_linkedin.jpg" alt="logolinkedin" class="logosocial"></a></div>
 
-                    <div><a href="https://twitter.com/LaPlateformeIO" target="_blank"><img src="Assets/logo_twitter.JPG" alt="logotwitter" class="logosocial"></a></div>
+                    <div><a href="https://twitter.com/LaPlateformeIO" target="_blank"><img src="Assets/logo_twitter.jpg" alt="logotwitter" class="logosocial"></a></div>
 
-                    <div><a href="https://www.instagram.com/LaPlateformeIO/" target="_blank"><img src="Assets/logo_insta.JPG" alt="logoinstagram" class="logosocial"></a></div>
+                    <div><a href="https://www.instagram.com/LaPlateformeIO/" target="_blank"><img src="Assets/logo_insta.jpg" alt="logoinstagram" class="logosocial"></a></div>
 
                 </div>
             </div>
