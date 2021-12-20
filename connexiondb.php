@@ -3,9 +3,9 @@
 //Déclaration des variables de connexion
  
 $BDD = array();
-$BDD ['host'] = "localhost" ;
-$BDD ['user'] = "root" ;
-$BDD ['pass'] = "" ;
+$BDD ['host'] = "localhost:3306" ;
+$BDD ['user'] = "reservationtest" ;
+$BDD ['pass'] = "Marseille13!" ;
 $BDD ['db'] = "reservationsalles" ;
 
 
